@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: ${SCHEDULE_DB_URL}
+    username: ${SCHEDULE_DB_USERNAME}
+    password: ${SCHEDULE_DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format-sql: false
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+
+app:
+  services:
+    auth:
+      base-url: ${AUTH_SERVICE_URL}
+
+logging:
+  level:
+    root: INFO
+    com.gestaoescalas.schedule: INFO
+    com.hibernate.SQL: OFF
+    com.hibernate.orm.jdbc.bind: OFF
