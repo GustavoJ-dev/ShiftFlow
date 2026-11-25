@@ -2,10 +2,7 @@ package com.gestaoescalas.schedule.entity;
 
 import com.gestaoescalas.schedule.enums.ShiftStatus;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -49,6 +46,13 @@ public class Shift {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    public Shift(Long employeeId, LocalDateTime startAt, LocalDateTime endAt){
+
+        this.employeeId = employeeId;
+        this.startAt = startAt;
+        this.endAt = endAt;
+    }
+
     /**
      * Define as datas de criação e atualização antes da primeira
      * persistência da entidade.
@@ -56,8 +60,10 @@ public class Shift {
     @PrePersist
     protected void onCreate() {
 
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+
+        this.createdAt = now;
+        this.updatedAt = now;
     }
 
     /**

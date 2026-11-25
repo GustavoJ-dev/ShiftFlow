@@ -16,15 +16,12 @@
     <groupId>com.gestaoescalas</groupId>
     <artifactId>shift-flow</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-
     <packaging>pom</packaging>
 
     <name>ShiftFlow</name>
-
     <description>
-        API REST para gerenciamento de escalas corporativas, turnos e
-        solicitações de troca entre colaboradores, desenvolvida com
-        arquitetura de microsserviços.
+        API REST para gerenciamento de escalas corporativas,
+        turnos e solicitações de troca entre colaboradores.
     </description>
 
     <url>https://github.com/GustavoJ-dev/ShiftFlow</url>
@@ -60,12 +57,48 @@
     </modules>
 
     <properties>
+        <!-- Java -->
         <java.version>25</java.version>
-        <maven.compiler.release>25</maven.compiler.release>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- Versões de dependências externas -->
+        <!-- Bibliotecas externas -->
         <springdoc.version>3.0.0</springdoc.version>
+        <lombok.version>1.18.42</lombok.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <optional>true</optional>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <release>${java.version}</release>
+
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
