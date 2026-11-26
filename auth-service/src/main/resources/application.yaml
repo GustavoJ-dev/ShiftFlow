@@ -1,6 +1,9 @@
 spring:
   application:
     name: auth-service
+  output:
+    ansi:
+      enabled: ALWAYS
 
   profiles:
     default: dev
@@ -15,7 +18,8 @@ spring:
   flyway:
     enabled: true
 
-server: 8081
+server:
+  port: 8081
 
 logging:
   level:

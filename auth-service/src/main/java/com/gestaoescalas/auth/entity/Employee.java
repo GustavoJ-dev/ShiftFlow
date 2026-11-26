@@ -52,10 +52,29 @@ public class Employee {
     private LocalDateTime updatedAt;
 
     /**
+     * Construtor utilizado para criar um novo colaborador,
+     * inicializando seus dados pessoais, credenciais,
+     * papel de autorização e status de atividade.
+     *
+     * @param name nome do colaborador
+     * @param email endereço de e-mail do colaborador
+     * @param password senha do colaborador
+     * @param role papel de autorização do colaborador
+     * @param active indica se o colaborador está ativo
+     */
+    public Employee(String name, String email, String password, Role role, boolean active){
+
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.active = active;
+    }
+
+    /**
      * Define automaticamente as datas de criação e atualização
      * antes da primeira persistência da entidade.
      */
-
     @PrePersist
     protected void onCreate(){
 
