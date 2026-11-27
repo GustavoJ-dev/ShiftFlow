@@ -4,6 +4,9 @@ import com.gestaoescalas.schedule.client.EmployeeClient;
 import com.gestaoescalas.schedule.dto.ShiftCreateRequestDTO;
 import com.gestaoescalas.schedule.entity.Shift;
 import com.gestaoescalas.schedule.enums.ShiftStatus;
+import com.gestaoescalas.schedule.exception.EmployeeNotActiveException;
+import com.gestaoescalas.schedule.exception.InvalidShiftPeriodException;
+import com.gestaoescalas.schedule.exception.ShiftConflictException;
 import com.gestaoescalas.schedule.repository.ShiftRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,12 +25,12 @@ public class ShiftService {
 
         if (!requestDTO.endAt().isAfter(requestDTO.startAt())){
 
-            throw new IllegalArgumentException("O horário de término deve ser posterior ao horário de início.");
+            throw new InvalidShiftPeriodException("O horário de término deve ser posterior ao horário de início.");
         }
 
         if (!employeeClient.isEmployeeActive(requestDTO.employeeId())){
 
-            throw new RuntimeException("Colaborador não encontrado ou inativo.");
+            throw new EmployeeNotActiveException("Colaborador não encontrado ou inativo.");
         }
 
         var hasScheduleConflict = shiftRepository
@@ -39,7 +42,7 @@ public class ShiftService {
 
         if (hasScheduleConflict){
 
-            throw new RuntimeException("Esse funcionário já opera um turno nesse horário");
+            throw new ShiftConflictException("Esse funcionário já opera um turno nesse horário");
         }
 
         Shift shift = new Shift(
