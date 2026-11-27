@@ -21,7 +21,7 @@ server:
 app:
   services:
     auth:
-      base-url: ${ÀUTH_SERVICE_URL:http://localhost:8081}
+      base-url: ${AUTH_SERVICE_URL:http://localhost:8081}
 
 logging:
   level:
