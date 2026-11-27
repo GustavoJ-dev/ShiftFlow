@@ -49,6 +49,21 @@ public class SwapRequest {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+
+    /**
+     * Cria uma solicitação de troca de turno, definindo o turno relacionado,
+     * o colaborador solicitante e o colaborador destinatário.
+     *
+     * @param shiftId identificador do turno relacionado à solicitação.
+     * @param requesterEmployeeId identificador do colaborador que solicita a troca.
+     * @param targetEmployeeId identificador do colaborador que receberá o turno.
+     */
+    public SwapRequest(Long shiftId, Long requesterEmployeeId, Long targetEmployeeId) {
+        this.shiftId = shiftId;
+        this.requesterEmployeeId = requesterEmployeeId;
+        this.targetEmployeeId = targetEmployeeId;
+    }
+
     /**
      * Define as datas de criação e atualização antes da primeira
      * persistência da entidade.
